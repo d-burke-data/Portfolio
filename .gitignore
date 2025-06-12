@@ -1,7 +1,5 @@
 # Custom
-bootstrap-5.3.5-examples/
-*.ufo
-component_sample.js
+git-ignore/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

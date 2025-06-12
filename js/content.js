@@ -1,3 +1,59 @@
+class Head extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    // Retrieves html for this component from the designated file
+    connectedCallback() {
+      fetch("components/head.html")
+        .then(response => response.text())
+        .then(text => this.innerHTML = text);
+    }
+}
+customElements.define('head-component', Head);
+
+class Header extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    // Retrieves html for this component from the designated file
+    connectedCallback() {
+      fetch("components/header.html")
+        .then(response => response.text())
+        .then(text => this.innerHTML = text);
+    }
+}
+customElements.define('header-component', Header);
+
+class Footer extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    // Retrieves html for this component from the designated file
+    connectedCallback() {
+      fetch("components/footer.html")
+        .then(response => response.text())
+        .then(text => this.innerHTML = text);
+    }
+}
+customElements.define('footer-component', Footer);
+
+class Navbar extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    // Retrieves html for this component from the designated file
+    connectedCallback() {
+      fetch("components/navbar.html")
+        .then(response => response.text())
+        .then(text => this.innerHTML = text);
+    }
+}
+customElements.define('navbar-component', Navbar);
+
 class Home extends HTMLElement {
     constructor() {
       super();
@@ -151,3 +207,17 @@ class Project4 extends HTMLElement {
     }
 }
 customElements.define('project4-component', Project4);
+
+class Certificates extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    // Retrieves html for this component from the designated file
+    connectedCallback() {
+      fetch("components/certificates.html")
+        .then(response => response.text())
+        .then(text => this.innerHTML = text);
+    }
+}
+customElements.define('certificates-component', Certificates);

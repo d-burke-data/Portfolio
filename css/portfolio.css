@@ -1,6 +1,7 @@
 body {
   min-height: 100vh;
   min-height: -webkit-fill-available;
+  background-color: lightblue;
 }
 
 html {
@@ -8,11 +9,13 @@ html {
 }
 
 main {
+  min-height: 89vh;
   /* height: 100vh; */
   height: -webkit-fill-available;
   /* max-height: 200vh; */
   overflow-x: auto;
   overflow-y: hidden;
+  background-color: white;
 }
 
 .dropdown-toggle { outline: 0; }
@@ -62,13 +65,17 @@ main {
   overflow-y: auto;
 }
 
+/* Inter font: https://rsms.me/inter/ */
+
+:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
+}
+@supports (font-variation-settings: normal) {
+  :root { font-family: InterVariable, sans-serif; }
+}
+
 /* Custom */
-
-/* .bg-main {
-  background-color: green;
-  color: white;
-} */
-
 
 .bg-navbar {
   background-color: teal;
@@ -77,4 +84,34 @@ main {
 
 .img-viz {
   border: 2px solid black;
+}
+
+.bg-header {
+  background-color: turquoise;
+}
+
+.tbl-row-even {
+  background-color: lightgray;
+  color: black;
+  border: 1px solid darkgray;
+}
+
+.tbl-row-odd {
+  background-color: #BFBFBF;
+  color: black;
+  border: 1px solid gray;
+}
+
+.font-inter {
+  font-family: Inter
+}
+
+.heading {
+  background-color: gray;
+  color: white;
+}
+
+.subheading {
+  background-color: lightgray;
+  color: black;
 }

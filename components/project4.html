@@ -1,0 +1,253 @@
+<div class="row text-center heading">
+    <h1>PREDICTING FLIGHT DELAYS OUT OF LAX</h1>
+</div>
+<div class="row text-center">
+    <p><a href="https://github.com/brianna-mitri/project-4">GitHub Repository</a></p>
+</div>
+<div class="row text-left">
+    <h3 class="subheading">Overview</h3>
+    <p>In a team of four, This project demonstrates supervised machine learning to predict if a flight out of LAX airport will be delayed based
+        on factors such as day, time, aircraft model, and weather conditions. It is not representative of a consumer-level product, as the model
+        uses information not readily available to passengers (such as aircraft specifications), but is instead directed toward the aviation industry           
+        for logistical purposes.</p>
+    <h3 class="subheading">Methodology</h3>
+    <p>In Python, flight and weather data was cleaned and prepared for use by the machine learning models. The data was split into training and testing sets.
+        To facilitate direct comparisons between models and speed up the processing time, the same set of train-test data was used for each model.
+    </p>
+    <h5>Machine Learning Models</h5>
+<p>Using the pre-split data, the following models were tested:
+    <div class="col">
+        <ul>
+            <li>Random Forest</li>
+            <li>Logistic Regression</li>
+            <li>K-Nearest Neighbors</li>
+            <li>Neural Network</li>
+        </ul>
+    </div>
+<p>In addition to these, Support Vector Classification was attemped, but the model never successfully completed.
+    As such, results from that model are omitted.</p>
+<p>The models were tested against 3 configurations of target variables:</p>
+<div class="col">
+    <ul>
+        <li>Multiclass (6 classes)</li>
+        <li>Multiclass (4 classes)</li>
+        <li>Binary classification (Delayed / Not Delayed)</li>
+    </ul>
+</div>
+<p>The multiclass models failed to achieve accuracy near the desired goal of 75%, so attention was directed to binary classification.
+The results of those tests are below.</p>
+</div>
+<div class="row">
+    <h3 class="subheading">Results</h3>
+    <div class="row text-left"><h5>Random Forest</h5></div>    
+    <div class="row text-left">
+        <div class="row">
+            <div class="col">
+                <p>Using default values for Random Forest, the model reached a testing accuracy of 0.8424, with training accuracy of 0.9999.
+                This is overfitted, but hyperparameter adjustments to address the overfitting, determined by RandomSearchCV, resulted in underfitting.</p>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col-3 tbl-row-odd text-center">
+                        <strong>Configuration</strong>
+                    </div>
+                    <div class="col-3 tbl-row-odd text-center">
+                        <strong>Training Accuracy</strong>
+                    </div>
+                    <div class="col-3 tbl-row-odd text-center">
+                        <strong>Testing Accuracy</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3 tbl-row-even">
+                        Default
+                    </div>
+                    <div class="col-3 tbl-row-even text-end">
+                        0.9999
+                    </div>
+                    <div class="col-3 tbl-row-even text-end">
+                        0.8424
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3 tbl-row-odd">
+                        Optimized
+                    </div>
+                    <div class="col-3 tbl-row-odd text-end">
+                        0.5970
+                    </div>
+                    <div class="col-3 tbl-row-odd text-end">
+                        0.5968
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    &nbsp;
+    <div class="row text-left"><h5>Logistic Regression</h5></div>    
+    <div class="row text-left">
+        <div class="row text-left">
+            <div class="col">
+                <p>The logistic regression model appears reasonable on its surface with 84% accuracy.</p>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col-4 tbl-row-odd text-center">
+                        <strong>Training Accuracy</strong>
+                    </div>
+                    <div class="col-3 tbl-row-odd text-center">
+                        <strong>Testing Accuracy</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 tbl-row-even text-end">
+                        0.8397
+                    </div>
+                    <div class="col-3 tbl-row-even text-end">
+                        0.8397
+                    </div>
+                </div>
+                &nbsp;
+            </div>
+        </div>
+        <div class="row text-left">
+            <div class="col">
+                <p>But the Classification Report indicates otherwise with a recall of 0.00 for <code>Is Delayed</code> and 1.00 for <code>Not Delayed</code>.
+                Thus, the model is merely labelling all results as <code>Not Delayed</code>, which is not at all useful.</p>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col-3 tbl-row-odd text-center"><strong>Classification</strong></div>
+                    <div class="col-3 tbl-row-odd text-center"><strong>Precision</strong></div>
+                    <div class="col-3 tbl-row-odd text-center"><strong>Recall</strong></div>
+                </div>
+                <div class="row">
+                    <div class="col-3 tbl-row-even">Not Delayed</div>
+                    <div class="col-3 tbl-row-even text-end">0.84</div>
+                    <div class="col-3 tbl-row-even text-end">1.00</div>
+                </div>
+                <div class="row">
+                    <div class="col-3 tbl-row-odd">Is Delayed</div>
+                    <div class="col-3 tbl-row-odd text-end">0.48</div>
+                    <div class="col-3 tbl-row-odd text-end">0.00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    &nbsp;
+    <div class="row text-left"><h5>K-Nearest Neighbors</h5></div>    
+    <div class="row text-left">
+        <div class="row text-left">
+            <div class="col">
+                <p>This model has accuracy similar to Logistic Regression, but with slightly better prediction of delays.</p>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col-4 tbl-row-odd text-center">
+                        <strong>Training Accuracy</strong>
+                    </div>
+                    <div class="col-3 tbl-row-odd text-center">
+                        <strong>Testing Accuracy</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 tbl-row-even text-end">
+                        0.8619
+                    </div>
+                    <div class="col-3 tbl-row-even text-end">
+                        0.8223
+                    </div>
+                </div>
+                &nbsp;
+            </div>
+        </div>
+        <div class="row text-left">
+            <div class="col"></div>
+            <div class="col">
+                <div class="row">
+                    <div class="col-3 tbl-row-odd text-center"><strong>Classification</strong></div>
+                    <div class="col-3 tbl-row-odd text-center"><strong>Precision</strong></div>
+                    <div class="col-3 tbl-row-odd text-center"><strong>Recall</strong></div>
+                </div>
+                <div class="row">
+                    <div class="col-3 tbl-row-even">Not Delayed</div>
+                    <div class="col-3 tbl-row-even text-end">0.85</div>
+                    <div class="col-3 tbl-row-even text-end">0.95</div>
+                </div>
+                <div class="row">
+                    <div class="col-3 tbl-row-odd">Is Delayed</div>
+                    <div class="col-3 tbl-row-odd text-end">0.36</div>
+                    <div class="col-3 tbl-row-odd text-end">0.13</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    &nbsp;
+    <div class="row text-left"><h5>Neural Network</h5></div>    
+    <div class="row text-left">
+        <div class="row text-left">
+            <div class="col">
+                <p>Using Tensorflow and automating the tuning of hyperparameters with Keras Tuner, these results for a neural network model were achieved:</p>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col-4 tbl-row-odd text-center">
+                        <strong>Training Accuracy</strong>
+                    </div>
+                    <div class="col-3 tbl-row-odd text-center">
+                        <strong>Testing Accuracy</strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 tbl-row-even text-end">
+                        0.8508
+                    </div>
+                    <div class="col-3 tbl-row-even text-end">
+                        0.8369
+                    </div>
+                </div>
+                &nbsp;
+            </div>
+        </div>
+        <div class="row text-left">
+            <div class="col"></div>
+            <div class="col">
+                <div class="row">
+                    <div class="col-3 tbl-row-odd text-center"><strong>Classification</strong></div>
+                    <div class="col-3 tbl-row-odd text-center"><strong>Precision</strong></div>
+                    <div class="col-3 tbl-row-odd text-center"><strong>Recall</strong></div>
+                </div>
+                <div class="row">
+                    <div class="col-3 tbl-row-even">Not Delayed</div>
+                    <div class="col-3 tbl-row-even text-end">0.85</div>
+                    <div class="col-3 tbl-row-even text-end">0.96</div>
+                </div>
+                <div class="row">
+                    <div class="col-3 tbl-row-odd">Is Delayed</div>
+                    <div class="col-3 tbl-row-odd text-end">0.40</div>
+                    <div class="col-3 tbl-row-odd text-end">0.13</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+&nbsp;
+<div class="row">
+    <h3 class="subheading">Results</h3>
+    <div class="row text-left">
+        <div class="col">
+            <p>Of the models tested, the one selected for the final product was the Neural Network model. This model performed similarly to K-Nearest Neighbors,
+                but with slightly higher precision for <code>Is Delayed</code> and marginally better overall accuracy. Still, the model needs improvement through
+                better selection of features (removing some, adding others) and tuning of hyperparameters.</p>
+        </div>
+    </div>
+</div>
+<!-- Footer Navigation -->
+&nbsp;
+<div class="row">
+    <div class="col-5"></div>
+    <div class="col-1 text-center"><a href="tornado-events-dashboard.html">Previous</a></div>
+    <div class="col-1 text-center">Next</div>
+    <div class="col-5"></div>
+</div>
+&nbsp;

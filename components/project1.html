@@ -1,101 +1,112 @@
-<div class="container">
-    <div class="row text-center">
-        <h1>U.S. HOUSING CONSTRAINTS</h1>
-        <p><a href="https://github.com/d-burke-data/Project_01">GitHub Repository</a></p>
-    </div>
-    <div class="row text-left">        
-        <h3><u>Overview</u></h3>
-        <p>In a team of four, we analyzed several factors to determine their relation to housing in the United States during the 20-year period of 2004 to 2023.
-        These factors included: household income, population growth, interest rates, building permits, unemployment, and education.
-        We found some of these factors are correlated while others are not.
-        We also identified several trends in housing, such as declining home affordability and fluctuations due to the 2008 housing crisis
-        as well as COVID in 2020.</p>
-        <h3><u>Methodology</u></h3>
-        <p>This project used Python (Jupyter Notebook, Pandas, Numpy, Matplotlib, SciPy, Geopandas) to read data from CSV files, conduct statistical analyses, and produce visualizations.
-        Data was retrieved from <a href="https://fred.stlouisfed.org/">FRED</a> using their API.
-        </p>                
-    </div>
-    <div class="row">
-        <h3><u>Results</u></h3>
-        <div class="col text-left">
-            <div class="row"><h5>Figure 1</h5></div>
-            <div class="row">
-                <p>The change in median home values from 2004 to 2023 shows a great disparity between the top and bottom five states. The least-expensive
-                    states are closely clustered in value, with little fluctuation over this 20-year-period. The five most-expensive states, however,
-                    show much greater volatility and wider differences in values in any given year. California, for example, experienced a peak in 2006,
-                    followed by a trough that it didn't recover from until 2018.
-                </p>
-            </div>
-        </div>
-        <div class="col-md">
-            <a href="images/project-01/d01_Home_Values_Top_Bottom_2004-2023.png"><img class="img-viz" src="images/project-01/d01_Home_Values_Top_Bottom_2004-2023.png" alt="Home values for the top and bottom 5 states 2004-2023" width="500" height="400"></a>
-        </div>
-    </div>
-    &nbsp;
-    <div class="row">
-        <div class="col-xl">
-            <a href="images/project-01/d02_LinearRegression_Home_Values_Income.png"><img class="img-viz" src="images/project-01/d02_LinearRegression_Home_Values_Income.png" alt="Home value linear regression for the top and bottom 5 states 2004-2023" width="1000" height="400"></a>
-        </div>
-        <div class="col text-left">
-            <div class="row"><h5>Figure 2</h5></div>
-            <div class="row">
-                <p>These graphs plot linear regression between median home values and median incomes for 2004 and 2023. While there is only a moderate
-                    linear relationship (R<sup>2</sup>=0.56 in 2004 and R<sup>2</sup>=0.46 in 2023), the more important point is that this relationship
-                    actually <i>decreased</i>, meaning median income became <i>less</i> reliable as a predictor of home values. This is concerning,
-                    as for most homebuyers income is the primary avenue for home acquisition. When it is less dependable for pricing a home, homebuyers
-                    may face additional difficulties as they have fewer other assets to leverage for the purchase.
-                </p>
-            </div>
-        </div>
-    </div>
-    &nbsp;
-    <div class="row">
-        <div class="col">
-            <div class="row"><h5>Figures 3 & 4</h5></div>
-            <div class="row">
-                <p>Home affordability is the ratio of income to home value, and here we see a comparison of the top and bottom five states for 2004 and 2023.
-                    2004 is unsurprising: the most affordable states are predominantly rural, while the least affordable are notably urbanized, with the
-                    exception of Hawaii (which is expected to be less affordable by its nature of a remote tropical island paradise). Comparing to 2023, we
-                    see a few important changes. First, affordability decreased across the board, even among the most affordable states. Second, Illinois
-                    became the fifth most affordable state. This is interesting because, while Illinois does have considerable farmland, it is also home to
-                    Chicago, the third most populous city in the country; one would expect that would put it toward the other end of the scale. Next, while Hawaii
-                    overtook California as the least affordable state, California's affordability still decreased; Hawaii's just decreased by a greater margin.
-                    Lastly, and perhaps most surprising, Idaho became the third least affordable state, suggesting a housing crisis in the rural state.
-                </p>
-            </div>
-        </div>
-        <div class="col-md">
-            <div class="row">
-                <a href="images/project-01/d03_Home_Affordability_Top_Bottom_2004.png"><img class="img-viz" src="images/project-01/d03_Home_Affordability_Top_Bottom_2004.png" alt="Home affordability for the top and bottom 5 states, 2004" width="580" height="240"></a>
-            </div>
-            &nbsp;
-            <div class="row">
-                <a href="images/project-01/d04_Home_Affordability_Top_Bottom_2023.png"><img class="img-viz" src="images/project-01/d04_Home_Affordability_Top_Bottom_2023.png" alt="Home affordability for the top and bottom 5 states, 2023" width="580" height="240"></a>
-            </div>
-        </div>
-    </div>
-    &nbsp;
-    <div class="row">
-        <div class="col-xl">
-            <a href="images/project-01/d05_Map_Home_Affordability_Pct_Change.png"><img class="img-viz" src="images/project-01/d05_Map_Home_Affordability_Pct_Change.png" alt="Home value linear regression for the top and bottom 5 states 2004-2023" width="1000" height="500"></a>
-        </div>
-        <div class="col text-left">
-            <div class="row"><h5>Figure 5</h5></div>
-            <div class="row">
-                <p>This map shows the percentage change in home affordability between 2004 and 2023. It has three noteworthy aspects. First, the map largely trends
-                    toward red, corrobroating the previous point that in most states affordability decreased. Second, of the few states in green, Illinois shows the
-                    greatest <i>increase</i> in affordability, explaining its showing as the fifth most affordable state in 2023. Lastly, Idaho clearly has the largest
-                    <i>decrease</i> at around 50%, reflecting a potential affordability disaster there.
-                </p>
-            </div>
-        </div>
-    </div>
-    &nbsp;
-    <div class="row">
-        <div class="col-5"></div>
-        <div class="col-1 text-center">Previous</div>
-        <div class="col-1 text-center"><a href="extract-transform-load.html">Next</a></div>
-        <div class="col-5"></div>
-    </div>
-    &nbsp;
+<div class="row text-center heading">
+    <h1>U.S. HOUSING CONSTRAINTS</h1>
 </div>
+<div class="row">
+    <div class="col text-center">
+        <img src="images/project-01/house.jpg" height="375" width="529">
+    </div>        
+</div>
+<div class="row text-center">
+    <p><a href="https://github.com/d-burke-data/Project_01">GitHub Repository</a></p>
+</div>
+<div class="row text-left">        
+    <h3 class="subheading">Overview</h3>
+    <p>In a team of four, we analyzed several factors to determine their relation to housing in the United States during the 20-year period of 2004 to 2023.
+    These factors included: household income, population growth, interest rates, building permits, unemployment, and education.
+    We found some of these factors are correlated while others are not.
+    We also identified several trends in housing, such as declining home affordability and fluctuations due to the 2008 housing crisis
+    as well as COVID in 2020.</p>
+    <h3 class="subheading">Methodology</h3>
+    <p>This project used Python (Jupyter Notebook, Pandas, Numpy, Matplotlib, SciPy, Geopandas) to read data from CSV files, conduct statistical analyses, and produce visualizations.
+    Data was retrieved from <a href="https://fred.stlouisfed.org/">FRED</a> using their API.
+    </p>                
+</div>
+<div class="row">
+    <h3 class="subheading">Results</h3>
+    <div class="col text-left">
+        <div class="row"><h5>Figure 1</h5></div>
+        <div class="row">
+            <p>The change in median home values from 2004 to 2023 shows a great disparity between the top and bottom five states. The least-expensive
+                states are closely clustered in value, with little fluctuation over this 20-year-period. The five most-expensive states, however,
+                show much greater volatility and wider differences in values in any given year. California, for example, experienced a peak in 2006,
+                followed by a trough that it didn't recover from until 2018.
+            </p>
+        </div>
+    </div>
+    <div class="col">
+        <a href="images/project-01/d01_Home_Values_Top_Bottom_2004-2023.png"><img class="img-viz" src="images/project-01/d01_Home_Values_Top_Bottom_2004-2023.png" alt="Home values for the top and bottom 5 states 2004-2023" width="600" height="506"></a>
+    </div>
+</div>
+&nbsp;
+<div class="row">
+    <div class="col">
+        <a href="images/project-01/d02_LinearRegression_Home_Values_Income.png"><img class="img-viz" src="images/project-01/d02_LinearRegression_Home_Values_Income.png" alt="Home value linear regression for the top and bottom 5 states 2004-2023" width="841" height="370"></a>
+    </div>
+    <div class="col text-left">
+        <div class="row"><h5>Figure 2</h5></div>
+        <div class="row">
+            <p>These graphs plot linear regression between median home values and median incomes for 2004 and 2023. While there is only a moderate
+                linear relationship (R<sup>2</sup>=0.56 in 2004 and R<sup>2</sup>=0.46 in 2023), the more important point is that this relationship
+                actually <i>decreased</i>, meaning median income became <i>less</i> reliable as a predictor of home values. This is concerning,
+                as for most homebuyers income is the primary mechanism for home acquisition. When income is less dependable for pricing a home, potential
+                homebuyers may face additional difficulties as they have fewer other assets to leverage for the purchase.
+            </p>
+        </div>
+    </div>
+</div>
+&nbsp;
+<div class="row">
+    <div class="col">
+        <div class="row"><h5>Figures 3 & 4</h5></div>
+        <div class="row">
+            <p>Home affordability is the ratio of income to home value, and here we see a comparison of the top and bottom five states for 2004 and 2023.
+                2004 is unsurprising: the most affordable states are predominantly rural, while the least affordable are notably urbanized, with the
+                exception of Hawaii (which is expected to be less affordable by its nature as a remote tropical island paradise). Comparing to 2023, we
+                see a few important changes. First, affordability decreased across the board, even among the most affordable states. Second, Illinois
+                became the fifth most affordable state. This is interesting because, while Illinois does have considerable farmland, it is also home to
+                Chicago, the third most populous city in the country; one would expect that would put it toward the other end of the scale. Next, while Hawaii
+                overtook California as the least affordable state, California's affordability still decreased; Hawaii's just decreased by a greater margin.
+                Lastly, and perhaps most surprising, Idaho became the third least affordable state, suggesting a housing crisis in the rural state.
+            </p>
+        </div>
+    </div>
+    <div class="col">
+        <div class="row">
+            <a href="images/project-01/d03_Home_Affordability_Top_Bottom_2004.png"><img class="img-viz" src="images/project-01/d03_Home_Affordability_Top_Bottom_2004.png" alt="Home affordability for the top and bottom 5 states, 2004" width="580" height="240"></a>
+        </div>
+        &nbsp;
+        <div class="row">
+            <a href="images/project-01/d04_Home_Affordability_Top_Bottom_2023.png"><img class="img-viz" src="images/project-01/d04_Home_Affordability_Top_Bottom_2023.png" alt="Home affordability for the top and bottom 5 states, 2023" width="580" height="240"></a>
+        </div>
+    </div>
+</div>
+&nbsp;
+<div class="row">
+    <div class="col">
+        <a href="images/project-01/d05_Map_Home_Affordability_Pct_Change.png"><img class="img-viz" src="images/project-01/d05_Map_Home_Affordability_Pct_Change.png" alt="Map of percentage change in home affordability from 2004 to 2023" width="633" height="420"></a>
+    </div>
+    <div class="col text-left">
+        <div class="row"><h5>Figure 5</h5></div>
+        <div class="row">
+            <p>This map shows the percentage change in home affordability between 2004 and 2023. It has three noteworthy aspects:
+                <div>
+            <ul>
+                <li>The map largely trends toward red, corrobroating the previous point that in most states affordability decreased</li>
+                <li>Of the few states in green, Illinois shows the greatest <i>increase</i> in affordability, explaining its showing as the fifth most affordable state in 2023.</li>
+                <li>Idaho clearly has the largest <i>decrease</i> at around 50%, reflecting a potential affordability disaster there.</li>
+            </ul>
+            </div>
+            </p>
+            <p>Note that Montana and North Dakota (in black) did not provide data in 2004, so they are omitted from the results.</p>
+        </div>
+    </div>
+</div>
+<!-- Footer Navigation -->
+&nbsp;
+<div class="row">
+    <div class="col-5"></div>
+    <div class="col-1 text-center">Previous</div>
+    <div class="col-1 text-center"><a href="extract-transform-load.html">Next</a></div>
+    <div class="col-5"></div>
+</div>
+&nbsp;

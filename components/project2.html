@@ -1,175 +1,175 @@
-<div class="container">
-    <div class="row text-center">
-        <h1>EXTRACT, TRANSFORM, LOAD</h1>
-        <p><a href="https://github.com/d-burke-data/Project_02">GitHub Repository</a></p>
-    </div>
-    <div class="row text-left">        
-        <h3><u>Overview</u></h3>
-        <p>This was a smaller partner project demonstrating the ETL (Extract, Transform, Load) process. Using Python (Jupyter Notebook, Pandas),
-            data was read from Excel files, cleaned and transformed into the desired format, then exported to CSV files (one per table as per the ERD,
-            or Entity Relationship Diagram). A PostgreSQL database was created using the schema from the ERD, then the data for each table was imported
-            from the previously created CSV files. Finally, SQL query statements were executed to confirm the correct creation of the database and 
-            importing of data.</p>
-        <p>Unfortunately, the results of this work are not particularly visual, so code snippets are provided to illustrate data engineering.</p>
-    </div>
-    <div class="row text-left">
-        <h3><u>Methodology</u></h3>
-        <div class="col text-left">
-            <div class="row"><h5>Entity Relationship Diagram (ERD)</h5></div>
-            <div class="row">
-                <p>
-                    This ERD shows the final relational layout for the database, including the connection between foreign keys in different tables.
-                    Because the original data was not formatted to fit this arrangement, we needed to transform it into a suitable format (see below) 
-                    before it could be added to the database.
-                </p>
-            </div>
-        </div>
-        <div class="col">
-            <a href="images/project-02/ERD.png"><img class="img-viz" src="images/project-02/ERD-small.png" alt="Entity Relationship Diagram for proposed PostgreSQL database" width="575" height="403"></a>
-        </div>
-    </div>
-    &nbsp;
-    <div class="row">
-            <div class="col text-left">
-            <div class="row"><h5>PostgreSQL Schema</h5></div>
-            <div class="row">
-                <p>This is the schema used to create the PostgreSQL database based on the ERD above:</p>
-                <code>
-CREATE TABLE "category" (<br>
-    &nbsp;&nbsp;&nbsp;"category_id" VARCHAR   NOT NULL,<br>    
-    &nbsp;&nbsp;&nbsp;"category" VARCHAR   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;CONSTRAINT "pk_category" PRIMARY KEY ("category_id")<br>
-);<br><br>
-
-CREATE TABLE "subcategory" (<br>
-    &nbsp;&nbsp;&nbsp;"subcategory_id" VARCHAR   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;"subcategory" VARCHAR   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;CONSTRAINT "pk_subcategory" PRIMARY KEY ("subcategory_id")<br>
-);<br><br>
-
-CREATE TABLE "contacts" (<br>
-    &nbsp;&nbsp;&nbsp;"contact_id" INT   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;"first_name" VARCHAR   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;"last_name" VARCHAR   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;"email" VARCHAR   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;CONSTRAINT "pk_contacts" PRIMARY KEY ("contact_id")<br>
-);<br><br>
-
-CREATE TABLE "campaign" (<br>
-    &nbsp;&nbsp;&nbsp;"cf_id" INT   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;"contact_id" INT   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;"company_name" VARCHAR   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;"description" VARCHAR   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;"goal" FLOAT   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;"pledged" FLOAT   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;"outcome" VARCHAR   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;"backers_count" INT   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;"country" VARCHAR   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;"currency" VARCHAR   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;"launch_date" DATE   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;"end_date" DATE   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;"category_id" VARCHAR   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;"subcategory_id" VARCHAR   NOT NULL,<br>
-    &nbsp;&nbsp;&nbsp;CONSTRAINT "pk_campaign" PRIMARY KEY ("cf_id")<br>
-);<br><br>
-
-ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_contact_id" FOREIGN KEY("contact_id")<br>
-REFERENCES "contacts" ("contact_id");<br><br>
-
-ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_category_id" FOREIGN KEY("category_id")<br>
-REFERENCES "category" ("category_id");<br><br>
-
-ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_subcategory_id" FOREIGN KEY("subcategory_id")<br>
-REFERENCES "subcategory" ("subcategory_id");<br><br>
-                </code>                
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <h5>Transform</h5>
-        <p>In Python, the data was loaded from the original CSV files into Pandas dataframes, transformed, then saved to new output CSV files to load
-            into the database. A sampling of these transform techniques are below.
-        </p>
-        <i>Split Category & Subcategory</i><br>
+<div class="row text-center heading">
+    <h1>EXTRACT, TRANSFORM, LOAD</h1>        
+</div>
+<div class="row text-center">
+    <p><a href="https://github.com/d-burke-data/Project_02">GitHub Repository</a></p>
+</div>
+<div class="row text-left">        
+    <h3 class="subheading">Overview</h3>
+    <p>This was a smaller partner project demonstrating the ETL (Extract, Transform, Load) process. Using Python (Jupyter Notebook, Pandas),
+        data was read from Excel files, cleaned and transformed into the desired format, then exported to CSV files (one per table as per the ERD,
+        or Entity Relationship Diagram). A PostgreSQL database was created using the schema from the ERD, then the data for each table was imported
+        from the previously created CSV files. Finally, SQL query statements were executed to confirm the correct creation of the database and 
+        importing of data.</p>
+    <p>The results of this work are not particularly visual, so code snippets are provided to illustrate data engineering.</p>
+</div>
+<div class="row text-left">
+    <h3 class="subheading">Methodology</h3>
+    <div class="col text-left">
+        <div class="row"><h5>Entity Relationship Diagram (ERD)</h5></div>
         <div class="row">
-            <div class="col-2">Input</div>
-            <div class="col-10">
+            <p>This ERD shows the final relational layout for the database, including the connection between foreign keys in different tables.
+                Because the original data was not formatted to fit this arrangement, we needed to transform it into a suitable format (see below) 
+                before it could be added to the database.</p>
+        </div>
+    </div>
+    <div class="col">
+        <a href="images/project-02/ERD.png"><img class="img-viz" src="images/project-02/ERD-small.png" alt="Entity Relationship Diagram for proposed PostgreSQL database" width="575" height="403"></a>
+    </div>
+</div>
+&nbsp;
+<div class="row">
+        <div class="col text-left">
+        <div class="row"><h5>PostgreSQL Schema</h5></div>
+        <div class="row">
+            <p>This is the schema used to create the PostgreSQL database based on the ERD above:</p>
+            <code>
+                CREATE TABLE "category" (<br>
+                    &nbsp;&nbsp;&nbsp;"category_id" VARCHAR   NOT NULL,<br>    
+                    &nbsp;&nbsp;&nbsp;"category" VARCHAR   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;CONSTRAINT "pk_category" PRIMARY KEY ("category_id")<br>
+                );<br><br>
+
+                CREATE TABLE "subcategory" (<br>
+                    &nbsp;&nbsp;&nbsp;"subcategory_id" VARCHAR   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;"subcategory" VARCHAR   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;CONSTRAINT "pk_subcategory" PRIMARY KEY ("subcategory_id")<br>
+                );<br><br>
+
+                CREATE TABLE "contacts" (<br>
+                    &nbsp;&nbsp;&nbsp;"contact_id" INT   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;"first_name" VARCHAR   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;"last_name" VARCHAR   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;"email" VARCHAR   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;CONSTRAINT "pk_contacts" PRIMARY KEY ("contact_id")<br>
+                );<br><br>
+
+                CREATE TABLE "campaign" (<br>
+                    &nbsp;&nbsp;&nbsp;"cf_id" INT   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;"contact_id" INT   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;"company_name" VARCHAR   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;"description" VARCHAR   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;"goal" FLOAT   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;"pledged" FLOAT   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;"outcome" VARCHAR   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;"backers_count" INT   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;"country" VARCHAR   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;"currency" VARCHAR   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;"launch_date" DATE   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;"end_date" DATE   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;"category_id" VARCHAR   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;"subcategory_id" VARCHAR   NOT NULL,<br>
+                    &nbsp;&nbsp;&nbsp;CONSTRAINT "pk_campaign" PRIMARY KEY ("cf_id")<br>
+                );<br><br>
+
+                ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_contact_id" FOREIGN KEY("contact_id")<br>
+                REFERENCES "contacts" ("contact_id");<br><br>
+
+                ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_category_id" FOREIGN KEY("category_id")<br>
+                REFERENCES "category" ("category_id");<br><br>
+
+                ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_subcategory_id" FOREIGN KEY("subcategory_id")<br>
+                REFERENCES "subcategory" ("subcategory_id");<br><br>
+            </code>                
+        </div>
+    </div>
+</div>
+<div class="row">
+    <h5>Transform</h5>
+    <p>In Python, the data was loaded from the original CSV files into Pandas dataframes, transformed, then saved to new output CSV files to load
+        into the database. A sampling of these transform techniques are below.
+    </p>
+    
+    <p>
+        <i>Split Category & Subcategory:</i><br>
+        <div class="row">
+            <div class="col-2 tbl-row-odd">Input</div>
+            <div class="col-10 tbl-row-odd">
                 <strong>category & sub-category</strong><br>
                 food/food trucks<br>
                 music/rock<br>
                 technology/web<br>
                 music/rock<br>
                 theater/plays<br>
-                &nbsp;
             </div>
         </div>
         <div class="row">
-            <div class="col-2">Python</div>
-            <div class="col-10">
+            <div class="col-2 tbl-row-even">Python</div>
+            <div class="col-10 tbl-row-even">
                 <code>cat_subcat = crowdfunding_info_df['category & sub-category'].str.split('/')<br>
                     crowdfunding_info_df[['category', 'subcategory']] = pd.DataFrame(cat_subcat.tolist(), index=cat_subcat.index)
                 </code>
                 <br>&nbsp;
             </div>
         </div>
-        <div class="row">
-            <div class="col-2">Output</div>
-            <div class="col-10">
-                <div class="row">
-                    <div class="col-3"><strong>category</strong><br>
-                        food<br>
-                        music<br>
-                        technology<br>
-                        music<br>
-                        theater</div>
-                    <div class="col-3"><strong>sub-category</strong><br>
-                        food trucks<br>
-                        rock<br>
-                        web<br>
-                        rock<br>
-                        plays</div>
+            <div class="row">
+                <div class="col-2 tbl-row-odd">Output</div>
+                <div class="col-10 tbl-row-odd">
+                    <div class="row">
+                        <div class="col-3"><strong>category</strong><br>
+                            food<br>
+                            music<br>
+                            technology<br>
+                            music<br>
+                            theater</div>
+                        <div class="col-3"><strong>sub-category</strong><br>
+                            food trucks<br>
+                            rock<br>
+                            web<br>
+                            rock<br>
+                            plays</div>
                     </div>
                     <div class="col-4"></div>
                 </div>
             </div>
-            &nbsp;
-            <i>Separate Contact Info</i>
+        </p>
+            <p>
+            <i>Separate Contact Info:</i>
             <div class="row">
-                <div class="col-2">Input</div>
-                <div class="col-10">
+                <div class="col-2 tbl-row-odd">Input</div>
+                <div class="col-10 tbl-row-odd">
                     <strong>contact_info</strong><br>
-{"contact_id": 4661, "name": "Cecilia Velasco", "email": "cecilia.velasco@rodrigues.fr"}<br>
-{"contact_id": 3765, "name": "Mariana Ellis", "email": "mariana.ellis@rossi.org"}<br>
-{"contact_id": 4187, "name": "Sofie Woods", "email": "sofie.woods@riviere.com"}<br>
-{"contact_id": 4941, "name": "Jeanette Iannotti", "email": "jeanette.iannotti@yahoo.com"}<br>
-{"contact_id": 2199, "name": "Samuel Sorgatz", "email": "samuel.sorgatz@gmail.com"}<br>
-<br>
-                </div>                
+                    {"contact_id": 4661, "name": "Cecilia Velasco", "email": "cecilia.velasco@rodrigues.fr"}<br>
+                    {"contact_id": 3765, "name": "Mariana Ellis", "email": "mariana.ellis@rossi.org"}<br>
+                    {"contact_id": 4187, "name": "Sofie Woods", "email": "sofie.woods@riviere.com"}<br>
+                    {"contact_id": 4941, "name": "Jeanette Iannotti", "email": "jeanette.iannotti@yahoo.com"}<br>
+                    {"contact_id": 2199, "name": "Samuel Sorgatz", "email": "samuel.sorgatz@gmail.com"}<br><br>
+                </div>
             </div>
             <div class="row">
-                <div class="col-2">Python</div>
-                <div class="col-10">
+                <div class="col-2 tbl-row-even">Python</div>
+                <div class="col-10 tbl-row-even">
                     <code>
                         # Using Regex:<br>
                         pattern = r'"contact_id": (\d+),'<br>
                         contact_info_df_copy['contact_id'] = contact_info_df_copy['contact_info'].str.extract(pattern)<br>
                         contact_info_df_copy['contact_id'] = pd.to_numeric(contact_info_df_copy['contact_id'])<br><br>
                         pattern = r'"name": "(\w+\s\w+)"'<br>
-contact_info_df_copy['name'] = contact_info_df_copy['contact_info'].str.extract(pattern)<br><br>
-pattern = r'"email": "(.+@.+[.].+)"'<br>
-contact_info_df_copy['email'] = contact_info_df_copy['contact_info'].str.extract(pattern)<br>
-contacts_df_clean = contact_info_df_copy.drop('contact_info', axis=1)<br>
-pattern = r'(\w+)\s\w+'<br>
-contacts_df_clean['first_name'] = contacts_df_clean['name'].str.extract(pattern)<br><br>
-pattern = r'\w+\s(\w+)'<br>
-contacts_df_clean['last_name'] = contacts_df_clean['name'].str.extract(pattern)<br><br>
-contacts_df_clean = contacts_df_clean.drop('name', axis=1)<br><br>
+                        contact_info_df_copy['name'] = contact_info_df_copy['contact_info'].str.extract(pattern)<br><br>
+                        pattern = r'"email": "(.+@.+[.].+)"'<br>
+                        contact_info_df_copy['email'] = contact_info_df_copy['contact_info'].str.extract(pattern)<br>
+                        contacts_df_clean = contact_info_df_copy.drop('contact_info', axis=1)<br>
+                        pattern = r'(\w+)\s\w+'<br>
+                        contacts_df_clean['first_name'] = contacts_df_clean['name'].str.extract(pattern)<br><br>
+                        pattern = r'\w+\s(\w+)'<br>
+                        contacts_df_clean['last_name'] = contacts_df_clean['name'].str.extract(pattern)<br><br>
+                        contacts_df_clean = contacts_df_clean.drop('name', axis=1)<br>
                     </code>
                 </div>
             </div>
             <div class="row">
-                <div class="col-2">Output</div>
-                <div class="col-10">
+                <div class="col-2 tbl-row-odd">Output</div>
+                <div class="col-10 tbl-row-odd">
                     <div class="row">
                         <div class="col">
                             <strong>contact_id</strong><br>
@@ -204,19 +204,17 @@ contacts_df_clean = contacts_df_clean.drop('name', axis=1)<br><br>
                             samuel.sorgatz@gmail.com<br>
                         </div>
                     </div>
-
                 </div>
             </div>
-
-        </div>
+        </p>
     </div>
-
-    &nbsp;
-    <div class="row">
-        <div class="col-5"></div>
-        <div class="col-1 text-center"><a href="housing-constraints.html">Previous</a></div>
-        <div class="col-1 text-center"><a href="tornado-events-dashboard.html">Next</a></div>
-        <div class="col-5"></div>
-    </div>
-    &nbsp;
 </div>
+<!-- Footer Navigation -->
+&nbsp;
+<div class="row">
+    <div class="col-5"></div>
+    <div class="col-1 text-center"><a href="housing-constraints.html">Previous</a></div>
+    <div class="col-1 text-center"><a href="tornado-events-dashboard.html">Next</a></div>
+    <div class="col-5"></div>
+</div>
+&nbsp;
